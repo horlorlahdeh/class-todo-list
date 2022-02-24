@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Header from './components/Header';
+import TodoItems from './components/TodoItems';
+import todosData from './data';
+
 import './App.css';
 
 function App() {
+  const [todos, setTodos] = useState(todosData);
+
+  const handleDeleteTodoItem = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      {/* @TODO: Use Class Component To Create NavBar and Add Todo Input */}
+      <Header
+        title='REACT TODO WORK APP'
+        description='This is an application to track all my daily routine'
+      />
+      <TodoItems todos={todos} todoDeleteHandler={handleDeleteTodoItem} />
     </div>
   );
 }
